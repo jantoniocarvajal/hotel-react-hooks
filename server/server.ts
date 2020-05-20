@@ -1,9 +1,13 @@
 import express, { Application } from 'express';
 import { configureIndexRoutes } from './routes/indexRoutes';
+import { HotelRepository } from './repositories/hotels';
+import { configureHotelRoutes } from './routes/hotelRoutes';
 
 /** Class where we configure the server for backend */
 class Server {
     public app: Application;
+
+    private hotelsRespository = new HotelRepository();
 
     constructor() {
         this.app = express();
@@ -22,6 +26,7 @@ class Server {
     /** Configuration for the routes of our api */
     private configureRoutes(): void {
         configureIndexRoutes(this.app);
+        configureHotelRoutes(this.app, this.hotelsRespository);
     }
 
     /** Start the server */
