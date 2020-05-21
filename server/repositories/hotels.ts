@@ -37,4 +37,9 @@ export class HotelRepository {
 
         return Promise.resolve(hotel);
     }
+
+    public delete(id: string): Promise<boolean> {
+        this.hotels = this.hotels.filter(hotel => hotel.id !== id);
+        return Promise.resolve(true);
+    }
 }

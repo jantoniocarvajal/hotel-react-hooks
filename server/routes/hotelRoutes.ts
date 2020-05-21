@@ -9,7 +9,8 @@ export function configureHotelRoutes(app: Application, repository: HotelReposito
 
     app.route('/api/hotels/:hotelId')
         .get(getHotel)
-        .post(saveHotel);
+        .post(saveHotel)
+        .delete(deleteHotel);
 
     async function getHotels(req: Request, res: Response) {
         const hotels = await repository.getAll();
@@ -39,6 +40,17 @@ export function configureHotelRoutes(app: Application, repository: HotelReposito
             }
         } else {
             res.status(400).send(`ID:${hotel.id} doesn't match with ID:${id} of the URL.`);
+        }
+    }
+
+    async function deleteHotel(req: Request, res: Response) {
+        const id = req.params.hotelId;
+        const deleted = await repository.delete(id);
+
+        if(deleted) {
+            res.status(200).send(`Hotel ID:${id} delete.`)
+        } else {
+            res.status(404).send(`Hotel ID:${id} not found.`);
         }
     }
 

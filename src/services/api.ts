@@ -42,3 +42,16 @@ export function saveHotel(hotel: Hotel): Promise<Hotel> {
         .then((response) => checkStatus(response))
         .then<Hotel>(response => response.json());
 }
+
+export function deleteHotel(id: string) {
+    const uri: string = `${apiUrl}hotels/${id}`;
+
+    return fetch(uri, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => response.json());
+}

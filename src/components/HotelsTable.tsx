@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { Hotel } from '../models';
 import { useHistory } from 'react-router-dom';
+import { deleteHotel } from '../services/api';
 
 interface HotelsTableProps {
     hotels: Hotel[];
+    onDelete: () => void;
 }
 
-export const HotelsTable = ({ hotels }: HotelsTableProps) => {
+export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
     const history = useHistory();
 
-    const onEdit = (id: string) => {
+    const onEditHotel = (id: string) => {
         history.push(`/hotels/${id}`);
     }
 
-    const onDelete = (id: string) => {
-        console.log(id)
+    const onDeleteHotel = (id: string) => {
+        deleteHotel(id).then(() => onDelete())
     }
 
     return (
@@ -38,8 +40,8 @@ export const HotelsTable = ({ hotels }: HotelsTableProps) => {
                                 <td>{hotel.phone}</td>
                                 <td>{hotel.mail}</td>
                                 <td>
-                                    <button className="button muted-button" onClick={() => onEdit(hotel.id)}>Edit</button>
-                                    <button className="button muted-button" onClick={() => onDelete(hotel.id)}>Delete</button>
+                                    <button className="button muted-button" onClick={() => onEditHotel(hotel.id)}>Edit</button>
+                                    <button className="button muted-button" onClick={() => onDeleteHotel(hotel.id)}>Delete</button>
                                 </td>
                             </tr>)
                     }

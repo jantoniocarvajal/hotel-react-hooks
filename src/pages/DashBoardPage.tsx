@@ -25,7 +25,7 @@ export function DashBoardPage() {
         <div>
             <h1>Bienvenid@</h1>
 
-            <HotelsTable hotels={hotels} />
+            <HotelsTable hotels={hotels} onDelete={loadHotels} />
 
             <button onClick={onNewHotel}>New Hotel</button>
         </div>
