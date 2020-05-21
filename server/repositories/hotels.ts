@@ -1,4 +1,4 @@
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 import { Hotel } from '../../src/models';
 import { findById, findIndex } from './helper';
 
@@ -31,7 +31,7 @@ export class HotelRepository {
                 return Promise.resolve(undefined);
             }
         } else {
-            hotel.id = uuid.v1();
+            hotel.id = uuid();
             this.hotels.push(hotel);
         }
 

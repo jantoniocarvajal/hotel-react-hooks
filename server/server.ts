@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import cors from 'cors';
 import { configureIndexRoutes } from './routes/indexRoutes';
 import { HotelRepository } from './repositories/hotels';
 import { configureHotelRoutes } from './routes/hotelRoutes';
@@ -6,8 +7,6 @@ import { configureHotelRoutes } from './routes/hotelRoutes';
 /** Class where we configure the server for backend */
 class Server {
     public app: Application;
-
-    private hotelsRespository = new HotelRepository();
 
     constructor() {
         this.app = express();
@@ -19,14 +18,18 @@ class Server {
     /** Configuration for express */
     private config(): void {
         this.app.set('port', process.env.PORT || process.env.port || 4000);
+
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(cors());
     }
 
     /** Configuration for the routes of our api */
     private configureRoutes(): void {
+        const hotelsRespository = new HotelRepository();
+
         configureIndexRoutes(this.app);
-        configureHotelRoutes(this.app, this.hotelsRespository);
+        configureHotelRoutes(this.app, hotelsRespository);
     }
 
     /** Start the server */
