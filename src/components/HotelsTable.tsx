@@ -21,20 +21,23 @@ export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
 
     return (
         <div>
+            <h3>Listado de hoteles</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Phone</th>
                         <th>Mail</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         hotels.map(hotel =>
                             <tr key={hotel.id}>
+                                <th>{hotel.id}</th>
                                 <td>{hotel.name}</td>
                                 <td>{hotel.address}</td>
                                 <td>{hotel.phone}</td>
