@@ -55,3 +55,19 @@ export function deleteHotel(id: string) {
     })
         .then(response => response.json());
 }
+
+export function signIn(username:string, password: string) {
+    const uri: string = `${apiUrl}users?username=${username}&password=${password}`;
+
+    console.log("paso por aqui")
+    return fetch(uri, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then((response) => checkStatus(response))
+        .then(response => response.json());
+
+}

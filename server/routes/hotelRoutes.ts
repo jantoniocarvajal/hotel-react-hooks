@@ -1,6 +1,7 @@
 import { Application, Request, Response } from 'express';
 import { Hotel } from '../../src/models';
 import { HotelRepository } from '../repositories/hotels';
+import passport from 'passport';
 
 export function configureHotelRoutes(app: Application, repository: HotelRepository): void {
     app.route('/api/hotels')
@@ -8,7 +9,7 @@ export function configureHotelRoutes(app: Application, repository: HotelReposito
         .post(saveHotel);
 
     app.route('/api/hotels/:hotelId')
-        .get(getHotel)
+        .get(getHotel, passport.authenticate('jwt'))
         .post(saveHotel)
         .delete(deleteHotel);
 
