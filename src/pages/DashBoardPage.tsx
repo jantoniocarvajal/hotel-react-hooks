@@ -4,6 +4,7 @@ import { HotelsTable } from '../components/HotelsTable';
 import { Hotel } from '../models';
 import { getHotels } from '../services/api';
 import { Pagination } from '../components/Pagination';
+import { Filter } from '../components/Filter';
 
 export function DashBoardPage() {
     const history = useHistory();
@@ -24,6 +25,15 @@ export function DashBoardPage() {
     /** Change Page */
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+    const filter = (name: string, address: string) => {
+        if (name === "" && address === "") {
+            loadHotels();
+        } else {
+            const filterHotels = hotels.filter(h => (name !== "" ? h.name === name : h) && (address !== "" ? h.address === address : h))
+            setHotels(filterHotels)
+        }
+    }
+
     const loadHotels = () => {
         getHotels().then(hotels => setHotels(hotels));
     }
@@ -36,6 +46,7 @@ export function DashBoardPage() {
         <div>
             <h1>Bienvenid@</h1>
 
+            <Filter filter={filter} />
             <HotelsTable hotels={currentHotels} onDelete={loadHotels} />
             <Pagination rowsByPage={rowsByPage} lenght={hotels.length} paginate={paginate} />
 
