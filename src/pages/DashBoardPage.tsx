@@ -43,14 +43,22 @@ export function DashBoardPage() {
     }
 
     return (
-        <div>
-            <h1>Bienvenid@</h1>
-
-            <Filter filter={filter} />
-            <HotelsTable hotels={currentHotels} onDelete={loadHotels} />
-            <Pagination rowsByPage={rowsByPage} lenght={hotels.length} paginate={paginate} />
-
-            <button onClick={onNewHotel}>New Hotel</button>
+        <div className="container">
+            <div className="row">
+                <h1>Bienvenid@</h1>
+            </div>
+            <div className="row">
+                <Filter filter={filter} />
+            </div>
+            <div className="row">
+                <HotelsTable hotels={currentHotels} onDelete={loadHotels} />
+            </div>
+            <div className="row">
+                <Pagination rowsByPage={rowsByPage} lenght={hotels.length} paginate={paginate} />
+            </div>
+            <div className="row">
+                <button onClick={onNewHotel}>New Hotel</button>
+            </div>
         </div>
     );
 }

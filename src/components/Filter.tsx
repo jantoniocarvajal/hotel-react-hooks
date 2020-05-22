@@ -15,13 +15,19 @@ export const Filter = ({ filter }: FilterProps) => {
     }
 
     return (
-        <div>
-            <h4>Name</h4>
-            <input value={nameFilter} onChange={(ev: any) => setNameFilter(ev.target.value)} />
-            <h4>Address</h4>
-            <input value={addressFilter} onChange={(ev: any) => setAddressFilter(ev.target.value)} />
-            <button onClick={() => filter(nameFilter, addressFilter)}>Filter</button>
-            <button onClick={onCleanFilter}>Clean</button>
+        <div className="container">
+            <div className="row">
+                <label>Name</label>
+                <input value={nameFilter} onChange={(ev: any) => setNameFilter(ev.target.value)} />
+            </div>
+            <div className="row">
+                <label>Address</label>
+                <input value={addressFilter} onChange={(ev: any) => setAddressFilter(ev.target.value)} />
+            </div>
+            <div className="row">
+                <button onClick={() => filter(nameFilter, addressFilter)}>Filter</button>
+                <button onClick={onCleanFilter}>Clean</button>
+            </div>
         </div>
     );
 }
