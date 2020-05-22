@@ -38,7 +38,7 @@ export function DashBoardPage() {
     }
 
     const loadHotels = () => {
-        getHotels().then(hotels => setHotels(hotels));
+        getHotels(actualState ? actualState.tokenApi : "").then(hotels => setHotels(hotels));
     }
 
     function onNewHotel() {

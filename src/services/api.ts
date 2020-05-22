@@ -12,30 +12,41 @@ function checkStatus(response: Response): Promise<Response> {
     }
 }
 
-export function getHotels(): Promise<Hotel[]> {
+export function getHotels(accessToken: string): Promise<Hotel[]> {
     const uri: string = `${apiUrl}hotels`;
 
-    return fetch(uri)
+    return fetch(uri, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+        })
         .then((response) => checkStatus(response))
         .then<Hotel[]>((response) => response.json());
 }
 
-export function getHotel(id: string): Promise<Hotel> {
+export function getHotel(id: string, accessToken: string): Promise<Hotel> {
     const uri: string = `${apiUrl}hotels/${id}`;
 
-    return fetch(uri)
+    return fetch(uri, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+        })
         .then((response) => checkStatus(response))
         .then<Hotel>((response) => response.json());
 }
 
-export function saveHotel(hotel: Hotel): Promise<Hotel> {
+export function saveHotel(hotel: Hotel, accessToken: string): Promise<Hotel> {
     const uri = hotel.id ? `${apiUrl}hotels/${hotel.id}` : `${apiUrl}hotels`;
 
     return fetch(uri, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(hotel)
     })
@@ -43,14 +54,15 @@ export function saveHotel(hotel: Hotel): Promise<Hotel> {
         .then<Hotel>(response => response.json());
 }
 
-export function deleteHotel(id: string) {
+export function deleteHotel(id: string, accessToken: string) {
     const uri: string = `${apiUrl}hotels/${id}`;
 
     return fetch(uri, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
         },
     })
         .then(response => response.json());

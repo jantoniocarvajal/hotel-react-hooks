@@ -3,6 +3,7 @@ import { Hotel } from '../models';
 import { useHistory } from 'react-router-dom';
 import { deleteHotel } from '../services/api';
 import "../styles.scss";
+import { useMapState } from '../contexts/MapState';
 
 
 interface HotelsTableProps {
@@ -12,13 +13,14 @@ interface HotelsTableProps {
 
 export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
     const history = useHistory();
+    const { mapState: { actualState }, setMapState } = useMapState()
 
     const onEditHotel = (id: string) => {
         history.push(`/hotels/${id}`);
     }
 
     const onDeleteHotel = (id: string) => {
-        deleteHotel(id).then(() => onDelete())
+        deleteHotel(id, actualState ? actualState.tokenApi : "").then(() => onDelete())
     }
 
     return (

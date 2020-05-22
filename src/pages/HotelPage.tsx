@@ -4,12 +4,15 @@ import { saveHotel } from '../services/api';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { getHotel } from '../services/api';
 import "../styles.scss";
+import { useMapState } from '../contexts/MapState';
 
 interface RouteParams {
     id: string;
 }
 
 export function HotelPage() {
+    const { mapState: { actualState }, setMapState } = useMapState()
+
     const history = useHistory();
     /** Get the param id of the url */
     const match = useRouteMatch<RouteParams>('/hotels/:id');
@@ -24,7 +27,7 @@ export function HotelPage() {
     }, [match?.params.id])
 
     const loadHotel = (id: string) => {
-        getHotel(id).then(hotel => setEntity(hotel));
+        getHotel(id, actualState ? actualState.tokenApi : "").then(hotel => setEntity(hotel));
     }
 
     function getSetter(propertyName: string) {
@@ -40,7 +43,7 @@ export function HotelPage() {
     }
 
     function onSave() {
-        saveHotel(entity);
+        saveHotel(entity, actualState ? actualState.tokenApi : "");
         history.goBack();
     }
 

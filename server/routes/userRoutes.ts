@@ -3,14 +3,15 @@ import jwt from 'jsonwebtoken';
 import config from '../config';
 import { UserRepository } from '../repositories/users';
 import { User } from '../../src/models';
+import passport from 'passport';
 
 export function configureUserRoutes(app: Application, repository: UserRepository): void {
     app.route('/api/users')
-        .get(getUsers)
+        .get(getUsers, passport.authenticate('jwt'))
         .post(signIn);
 
     app.route('/api/users/:userId')
-        .get(getUser);
+        .get(getUser, passport.authenticate('jwt'));
 
     async function getUsers(req: Request, res: Response) {
         const users = await repository.getAll();

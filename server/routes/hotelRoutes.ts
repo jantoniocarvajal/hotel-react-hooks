@@ -5,13 +5,13 @@ import passport from 'passport';
 
 export function configureHotelRoutes(app: Application, repository: HotelRepository): void {
     app.route('/api/hotels')
-        .get(getHotels)
-        .post(saveHotel);
+        .get(getHotels, passport.authenticate('jwt'))
+        .post(saveHotel, passport.authenticate('jwt'));
 
     app.route('/api/hotels/:hotelId')
         .get(getHotel, passport.authenticate('jwt'))
-        .post(saveHotel)
-        .delete(deleteHotel);
+        .post(saveHotel, passport.authenticate('jwt'))
+        .delete(deleteHotel, passport.authenticate('jwt'));
 
     async function getHotels(req: Request, res: Response) {
         const hotels = await repository.getAll();
