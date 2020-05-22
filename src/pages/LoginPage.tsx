@@ -2,6 +2,8 @@ import * as React from 'react';
 import { signIn } from '../services/api';
 import { useMapState, GlobalStore } from '../contexts/MapState';
 import { useHistory } from 'react-router-dom';
+import "../styles.scss";
+
 
 export function LoginPage() {
     const history = useHistory();
@@ -19,10 +21,13 @@ export function LoginPage() {
                 const { user } = res;
                 const { token } = res;
 
+                /** Save user and token in global store */
                 const newState = {userLogin: user, tokenApi: token} as GlobalStore
                 setMapState({ type: 'setState', nextState: { ...newState } })
                 history.push("/dashboard");
-            })
+            }).catch(
+                error => setError(true)
+            )
         } else {
             setError(true);
         }
