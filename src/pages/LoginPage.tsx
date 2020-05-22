@@ -1,25 +1,30 @@
 import * as React from 'react';
 import { signIn } from '../services/api';
+import { useMapState, GlobalStore } from '../contexts/MapState';
+import { useHistory } from 'react-router-dom';
 
 export function LoginPage() {
+    const history = useHistory();
+    const { mapState: { actualState }, setMapState } = useMapState()
+
     const [username, setUsername] = React.useState<string>("");
     const [password, setPassword] = React.useState<string>("");
     const [error, setError] = React.useState<boolean>(false)
 
     const onLogin = () => {
-        console.log("hago login")
         if (username !== '' && password !== '') {
-            console.log(username)
-            console.log(password)
+            setError(false);
 
             signIn(username, password).then(res => {
-                const {user} = res;
-                const {token} = res;
-                console.log(user)
-                console.log(token)
+                const { user } = res;
+                const { token } = res;
+
+                const newState = {userLogin: user, tokenApi: token} as GlobalStore
+                setMapState({ type: 'setState', nextState: { ...newState } })
+                history.push("/dashboard");
             })
         } else {
-            setError(true)
+            setError(true);
         }
     }
 

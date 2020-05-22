@@ -5,9 +5,12 @@ import { Hotel } from '../models';
 import { getHotels } from '../services/api';
 import { Pagination } from '../components/Pagination';
 import { Filter } from '../components/Filter';
+import { useMapState } from '../contexts/MapState';
 
 export function DashBoardPage() {
     const history = useHistory();
+
+    const { mapState: { actualState }, setMapState } = useMapState()
 
     const [hotels, setHotels] = React.useState<Hotel[]>([]);
     const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -45,7 +48,7 @@ export function DashBoardPage() {
     return (
         <div className="container">
             <div className="row">
-                <h1>Bienvenid@</h1>
+                <h1>{`Bienvenid@ ${actualState?.userLogin?.name}`}</h1>
             </div>
             <div className="row">
                 <Filter filter={filter} />

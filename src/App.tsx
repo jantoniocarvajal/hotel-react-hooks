@@ -4,18 +4,22 @@ import './App.css';
 import { DashBoardPage } from './pages/DashBoardPage';
 import { HotelPage } from './pages/HotelPage';
 import { LoginPage } from './pages/LoginPage';
+import { MapProvider } from './contexts/MapState';
+import PrivateRoute from './helper/PrivateRoute';
 
 export default class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact={true} path='/' component={DashBoardPage} />
-          <Route path='/hotels' component={HotelPage} />
-          <Route path='/hotels/:id' component={HotelPage} />
-          <Route path='/login' component={LoginPage} />
-        </Switch>
-      </BrowserRouter>
+      <MapProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact={true} path='/' component={LoginPage} />
+            <PrivateRoute path='/dashboard' component={DashBoardPage} />
+            <PrivateRoute path='/hotels' component={HotelPage} />
+            <PrivateRoute path='/hotels/:id' component={HotelPage} />
+          </Switch>
+        </BrowserRouter>
+      </MapProvider>
     )
   }
 }
