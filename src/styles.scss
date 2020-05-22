@@ -6,9 +6,8 @@
 .row {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    margin: 10px;
-    padding: 10px;
+    flex-wrap: wrap;
+    margin: 5px;
     width: 100%;
 }
 
@@ -18,4 +17,33 @@
     flex-basis: 100%;
     flex:1;
     margin: 5px;
+}
+
+.list-hotels {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    button.delete {
+        background-color: red;
+        color: white;
+    }
+
+    button.update {
+        background-color: blue;
+        color: white;
+    }
 }

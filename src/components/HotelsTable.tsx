@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Hotel } from '../models';
 import { useHistory } from 'react-router-dom';
 import { deleteHotel } from '../services/api';
+import "../styles.scss";
+
 
 interface HotelsTableProps {
     hotels: Hotel[];
@@ -22,7 +24,7 @@ export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
     return (
         <div>
             <h3>Listado de hoteles</h3>
-            <table>
+            <table className="list-hotels">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -43,8 +45,8 @@ export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
                                 <td>{hotel.phone}</td>
                                 <td>{hotel.mail}</td>
                                 <td>
-                                    <button className="button muted-button" onClick={() => onEditHotel(hotel.id)}>Edit</button>
-                                    <button className="button muted-button" onClick={() => onDeleteHotel(hotel.id)}>Delete</button>
+                                    <button className="button update" onClick={() => onEditHotel(hotel.id)}>Edit</button>
+                                    <button className="button delete" onClick={() => onDeleteHotel(hotel.id)}>Delete</button>
                                 </td>
                             </tr>)
                     }

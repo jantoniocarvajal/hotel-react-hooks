@@ -3,6 +3,7 @@ import { Hotel } from '../models';
 import { saveHotel } from '../services/api';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { getHotel } from '../services/api';
+import "../styles.scss";
 
 interface RouteParams {
     id: string;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import "../styles.scss";
 
 interface FilterProps {
     filter: (name: string, addres: string) => void;
