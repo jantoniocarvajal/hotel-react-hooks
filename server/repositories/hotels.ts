@@ -45,8 +45,12 @@ export class HotelRepository {
         return Promise.resolve(hotel);
     }
 
-    public delete(id: string): Promise<boolean> {
-        this.hotels = this.hotels.filter(hotel => hotel.id !== id);
-        return Promise.resolve(true);
+    public delete(id: string): Promise<Hotel | null> {
+        const hotel = findById(id, this.hotels);
+        /** If exists the hotel, we delete it */
+        if (hotel) {
+            this.hotels = this.hotels.filter(hotel => hotel.id !== id);
+        }
+        return Promise.resolve(hotel);
     }
 }

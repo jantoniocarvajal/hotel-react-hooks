@@ -1,26 +1,23 @@
 import * as React from 'react';
 import { Hotel } from '../models';
 import { useHistory } from 'react-router-dom';
-import { deleteHotel } from '../services/api';
 import "../styles.scss";
-import { useMapState } from '../contexts/MapState';
 
 
 interface HotelsTableProps {
     hotels: Hotel[];
-    onDelete: () => void;
+    onDelete: (id: string) => void;
 }
 
 export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
     const history = useHistory();
-    const { mapState: { actualState }, setMapState } = useMapState()
 
     const onEditHotel = (id: string) => {
         history.push(`/hotels/${id}`);
     }
 
     const onDeleteHotel = (id: string) => {
-        deleteHotel(id, actualState ? actualState.tokenApi : "").then(() => onDelete())
+        onDelete(id);
     }
 
     return (
@@ -48,7 +45,7 @@ export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
                                 <td>{hotel.mail}</td>
                                 <td>
                                     <button className="button update" onClick={() => onEditHotel(hotel.id)}>Edit</button>
-                                    <button className="button delete" onClick={() => onDeleteHotel(hotel.id)}>Delete</button>
+                                    <button className="button delete" onClick={() => {if(window.confirm('Delete the hotel?')){onDeleteHotel(hotel.id)};}}>Delete</button>
                                 </td>
                             </tr>)
                     }
