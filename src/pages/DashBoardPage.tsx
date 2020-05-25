@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { HotelsTable } from '../components/HotelsTable';
 import { Hotel } from '../models';
-import { getHotels } from '../services/api';
+import { getHotels, deleteHotel } from '../services/api';
 import { Pagination } from '../components/Pagination';
 import { Filter } from '../components/Filter';
 import { useMapState } from '../contexts/MapState';
@@ -41,6 +41,11 @@ export function DashBoardPage() {
         getHotels(actualState ? actualState.tokenApi : "").then(hotels => setHotels(hotels));
     }
 
+    const onDeleteHotel = (id: string) => {
+        deleteHotel(id, actualState ? actualState.tokenApi : "")
+            .then(() => loadHotels())
+    }
+
     function onNewHotel() {
         history.push("/hotels");
     }
@@ -54,7 +59,7 @@ export function DashBoardPage() {
                 <Filter filter={filter} />
             </div>
             <div className="row">
-                <HotelsTable hotels={currentHotels} onDelete={loadHotels} />
+                <HotelsTable hotels={currentHotels} onDelete={onDeleteHotel} />
             </div>
             <div className="row">
                 <Pagination rowsByPage={rowsByPage} lenght={hotels.length} paginate={paginate} />

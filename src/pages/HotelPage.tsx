@@ -18,6 +18,7 @@ export function HotelPage() {
     const match = useRouteMatch<RouteParams>('/hotels/:id');
 
     const [entity, setEntity] = React.useState<Hotel>({} as Hotel);
+    const [showError, setShowError] = React.useState<boolean>(false);
 
     /** Only execte with change the param id in the url */
     React.useEffect(() => {
@@ -43,8 +44,9 @@ export function HotelPage() {
     }
 
     function onSave() {
-        saveHotel(entity, actualState ? actualState.tokenApi : "");
-        history.goBack();
+        saveHotel(entity, actualState ? actualState.tokenApi : "")
+            .then(() => history.goBack())
+            .catch(() => setShowError(true));
     }
 
     function onCancel() {
@@ -76,6 +78,9 @@ export function HotelPage() {
                 <button onClick={onSave}>Save</button>
                 <button onClick={onCancel}>Cancel</button>
             </div>
+            {
+                showError && <h4>El nombre del hotel ya existe.</h4>
+            }
         </div>
     );
 }

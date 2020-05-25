@@ -5,6 +5,13 @@ import { findById, findIndex } from './helper';
 export class HotelRepository {
     private hotels: Hotel[] = [];
 
+    /** Get if the name of a hotel is duplicate */
+    public isDuplicateName(hotel: Hotel): boolean {
+        /** If in the database have a hotel with equal name and distint id, the name is duplicate  */
+        const index = this.hotels.findIndex(h => h.name === hotel.name && h.id !== hotel.id);
+        return index !== -1;
+    }
+
     public getAll(): Promise<Hotel[]> {
         return Promise.resolve(this.hotels.map(hotel => ({ ...hotel })));
     }
@@ -38,8 +45,12 @@ export class HotelRepository {
         return Promise.resolve(hotel);
     }
 
-    public delete(id: string): Promise<boolean> {
-        this.hotels = this.hotels.filter(hotel => hotel.id !== id);
-        return Promise.resolve(true);
+    public delete(id: string): Promise<Hotel | null> {
+        const hotel = findById(id, this.hotels);
+        /** If exists the hotel, we delete it */
+        if (hotel) {
+            this.hotels = this.hotels.filter(hotel => hotel.id !== id);
+        }
+        return Promise.resolve(hotel);
     }
 }

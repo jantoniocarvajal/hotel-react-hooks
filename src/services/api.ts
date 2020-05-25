@@ -65,7 +65,7 @@ export function deleteHotel(id: string, accessToken: string) {
             'Authorization': `Bearer ${accessToken}`
         },
     })
-        .then(response => response.json());
+        .then((response) => checkStatus(response))
 }
 
 export function signIn(username: string, password: string) {

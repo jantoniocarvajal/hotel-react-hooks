@@ -34,14 +34,14 @@ export function LoginPage() {
     }
 
     return (
-        <div className="container">
+        <div className="login">
             <div className="row">
                 <label>Username</label>
-                <input value={username} onChange={(ev: any) => setUsername(ev.target.value)} />
+                <input value={username} placeholder="username" onChange={(ev: any) => setUsername(ev.target.value)} />
             </div>
             <div className="row">
                 <label>Password</label>
-                <input value={password} onChange={(ev: any) => setPassword(ev.target.value)} />
+                <input value={password} type="password" placeholder="password" onChange={(ev: any) => setPassword(ev.target.value)} />
             </div>
             <div className="row">
                 <button onClick={onLogin}>Login</button>
