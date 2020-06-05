@@ -23,7 +23,7 @@ export const HotelsTable = ({ hotels, onDelete }: HotelsTableProps) => {
     return (
         <div>
             <h3>Listado de hoteles</h3>
-            <table className="list-hotels">
+            <table className="list-hotels card-hotels">
                 <thead>
                     <tr>
                         <th>#</th>
