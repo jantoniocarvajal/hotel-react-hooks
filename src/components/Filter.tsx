@@ -16,7 +16,7 @@ export const Filter = ({ filter }: FilterProps) => {
     }
 
     return (
-        <div className="container">
+        <div className="form-filter">
             <div className="row">
                 <label>Name</label>
                 <input value={nameFilter} onChange={(ev: any) => setNameFilter(ev.target.value)} />

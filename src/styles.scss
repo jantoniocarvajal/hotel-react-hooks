@@ -11,14 +11,6 @@
     width: 100%;
 }
 
-.column {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex:1;
-    margin: 5px;
-}
-
 .list-hotels {
     border-collapse: collapse;
     table-layout: fixed;
@@ -48,15 +40,141 @@
     }
 }
 
+@media screen and (max-width:500px) {
+    .card-hotels {
+        word-wrap:break-word;
+
+        thead {
+            display: none;
+        }
+
+        td {
+            display: block;
+            width: 100%;
+            background: #eee;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        tbody, tr {
+            display: block;
+        }
+
+    }
+}
+
 .login {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 35%;
+    top: 35%;
     background: royalblue;
     border: none;
     border-radius: 5px;
     padding: 10px;
     color: white;
-    width: 200px;
+    width: 300px;
     font-size: 14px;
+
+    div.row {
+        position: relative;
+        padding: 10px;
+
+        label {
+            color: black;
+            font-size: 17px;
+            padding: 15px;
+            margin-top: -30px;
+        }
+
+        input {
+            border: 1px solid black;
+            font-size: 17px;
+            width: 80%;
+            padding: 10px;
+            border-radius: 60px;
+            color: black;
+            font-weight: 100;
+            letter-spacing: 0.01em;
+        }
+    }
+}
+
+.form {
+    position: relative;
+    max-width: 500px;
+    background-color: white;
+
+    h2 {
+        color: black;
+        letter-spacing: 0.01em;
+        margin-left: 15px;
+        margin-bottom: 35px;
+    }
+
+    div.row {
+        position: relative;
+        padding: 10px;
+
+        label {
+            color: black;
+            font-size: 17px;
+            padding: 15px;
+            margin-top: -30px;
+        }
+
+        input {
+            border: 1px solid black;
+            font-size: 17px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 60px;
+            color: black;
+            font-weight: 100;
+            letter-spacing: 0.01em;
+        }
+    }
+}
+
+.form-filter {
+    position: relative;
+    max-width: 500px;
+    background-color: white;
+
+    div.row {
+        position: relative;
+        padding: 10px;
+
+        label {
+            color: black;
+            font-size: 15px;
+            margin-top: -30px;
+        }
+
+        input {
+            border: 1px solid black;
+            font-size: 15px;
+            width: 100%;
+            padding: 5px;
+            border-radius: 60px;
+            color: black;
+            letter-spacing: 0.01em;
+        }
+    }
+}
+
+button {
+    border: 1px solid black;
+    border-radius: 60px;
+    color: black;
+    margin: 5px;
+    font-size: 17px;
+    display: inline-block;
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    padding: 5px;
+    width: 100px;
+}
+
+.button-pagination {
+    width: 25px;
 }

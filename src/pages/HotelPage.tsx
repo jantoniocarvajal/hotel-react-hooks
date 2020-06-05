@@ -54,7 +54,7 @@ export function HotelPage() {
     }
 
     return (
-        <div className="container">
+        <div className="form">
             <div className="row">
                 <h2>{entity.id ? "Edit Hotel" : "New Hotel"}</h2>
             </div>

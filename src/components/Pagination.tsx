@@ -25,7 +25,7 @@ export const Pagination = ({ rowsByPage, lenght, paginate }: PaginationProps) =>
                 <button onClick={() => changePage(actualPage - 1)} disabled={actualPage === 1}>Previous</button>
                 {
                     numPages.map(number => (
-                        <button onClick={() => changePage(number)}>
+                        <button className="button-pagination" onClick={() => changePage(number)}>
                             {number}
                         </button>
                     ))
